@@ -1,0 +1,27 @@
+# https://docs.docker.com/reference/compose-file/
+
+services:
+  # https://docs.docker.com/reference/compose-file/services/
+
+  glusterfs:
+    # https://github.com/gluster/gluster-containers/pkgs/container/gluster-containers
+    # https://github.com/gluster/gluster-containers/blob/master/CentOS/Dockerfile
+    image: ghcr.io/gluster/gluster-containers
+
+    # https://docs.docker.com/reference/compose-file/services/#network_mode
+    network_mode: "host"
+
+    # https://docs.docker.com/reference/compose-file/services/#cgroup
+    cgroup: "host"
+
+    # https://docs.docker.com/reference/compose-file/services/#privileged
+    privileged: true
+
+    # https://docs.docker.com/reference/compose-file/services/#volumes
+    volumes:
+      - /etc/glusterfs:/etc/glusterfs:z
+      - /var/lib/glusterd:/var/lib/glusterd:z
+      - /var/log/glusterfs:/var/log/glusterfs:z
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /dev:/dev
+
