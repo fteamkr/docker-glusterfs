@@ -9,11 +9,11 @@
 
 
 ```
-sudo docker pull ghcr.io/gluster/gluster-containers
+sudo docker pull ghcr.io/gluster/gluster-containers:fedora
 
 sudo docker network create --scope=swarm --attachable -d overlay storage-network
 
-sudo docker run -v ~/glusterfs/config:/etc/glusterfs:z -v ~/glusterfs/lib:/var/lib/glusterd:z -v ~/glusterfs/log:/var/log/glusterfs:z -v ~/glusterfs/data:/data:z -v /sys/fs/cgroup:/sys/fs/cgroup:rw -d --privileged=true --net=storage-network -v /dev/:/dev --cgroupns=host ghcr.io/gluster/gluster-containers
+sudo docker run -v /etc/glusterfs:/etc/glusterfs:z -v /var/lib/glusterd:/var/lib/glusterd:z -v /var/log/glusterfs:/var/log/glusterfs:z -v /sys/fs/cgroup:/sys/fs/cgroup:rw -d --privileged=true -v /dev/:/dev --cgroupns=host ghcr.io/gluster/gluster-containers:fedora
 
 sudo docker plugin install --alias glusterfs originnexus/glusterfs-plugin
 ```
